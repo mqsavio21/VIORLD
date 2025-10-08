@@ -17,3 +17,17 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+use App\Http\Controllers\Auth\AdminLoginController;
+
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/login', [AdminLoginController::class, 'create'])->name('login');
+    Route::post('/login', [AdminLoginController::class, 'store']);
+});
+
+use App\Http\Controllers\Auth\CoachLoginController;
+
+Route::prefix('coach')->name('coach.')->group(function () {
+    Route::get('/login', [CoachLoginController::class, 'create'])->name('login');
+    Route::post('/login', [CoachLoginController::class, 'store']);
+});

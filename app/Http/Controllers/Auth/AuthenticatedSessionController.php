@@ -26,6 +26,18 @@ class AuthenticatedSessionController extends Controller
     {
         $request->authenticate();
 
+        $user = $request->user();
+
+        if ($user->role !== 'player') {
+            Auth::guard('web')->logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect('/login')->withErrors([
+                'email' => 'These credentials do not match our records for a player.',
+            ]);
+        }
+
         $request->session()->regenerate();
 
         return redirect()->intended(route('dashboard', absolute: false));
@@ -36,11 +48,24 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        $user = $request->user();
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+
+        if ($user) {
+            switch ($user->role) {
+                case 'admin':
+                    return redirect('/admin/login');
+                case 'coach':
+                    return redirect('/coach/login');
+                default:
+                    return redirect('/login');
+            }
+        }
 
         return redirect('/');
     }
