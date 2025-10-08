@@ -21,5 +21,12 @@ class DatabaseSeeder extends Seeder
             'team_id' => 1,
             'role' => 'admin',
         ]);
+
+        User::factory()->create([
+            'name' => 'Coach',
+            'email' => 'coach@example.com',
+            'team_id' => 1,
+            'role' => 'coach',
+        ]);
     }
 }
