@@ -13,18 +13,7 @@ class SchedulesTable
     {
         return $table
             ->columns([
-                \Filament\Tables\Columns\TextColumn::make('title')
-                    ->searchable(),
-                \Filament\Tables\Columns\TextColumn::make('date')
-                    ->date(),
-                \Filament\Tables\Columns\TextColumn::make('start_time')
-                    ->time(),
-                \Filament\Tables\Columns\TextColumn::make('end_time')
-                    ->time(),
-                \Filament\Tables\Columns\TextColumn::make('team.name')
-                    ->searchable(),
-                \Filament\Tables\Columns\TextColumn::make('user.name')
-                    ->searchable(),
+                //
             ])
             ->filters([
                 //

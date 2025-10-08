@@ -1,3 +1,0 @@
-admin@example.com / password
-coach@example.com / password
-player@example.com / password

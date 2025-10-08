@@ -13,14 +13,7 @@ class TeamsTable
     {
         return $table
             ->columns([
-                \Filament\Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                \Filament\Tables\Columns\TextColumn::make('coach.name')
-                    ->searchable(),
-                \Filament\Tables\Columns\TextColumn::make('assistantCoach.name')
-                    ->searchable(),
-                \Filament\Tables\Columns\TextColumn::make('max_players'),
-                \Filament\Tables\Columns\TextColumn::make('players_count')->counts('players'),
+                //
             ])
             ->filters([
                 //

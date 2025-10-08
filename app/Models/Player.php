@@ -2,21 +2,25 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Player extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'name',
+        'nickname',
         'rank',
-        'main_role',
-        'notes',
-        'user_id',
+        'role',
+        'discord_id',
+        'status',
+        'team_id',
     ];
 
-    public function user(): BelongsTo
+    public function team(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Team::class);
     }
 }

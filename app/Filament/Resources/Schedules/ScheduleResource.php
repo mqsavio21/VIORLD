@@ -8,10 +8,8 @@ use App\Filament\Resources\Schedules\Pages\ListSchedules;
 use App\Filament\Resources\Schedules\Schemas\ScheduleForm;
 use App\Filament\Resources\Schedules\Tables\SchedulesTable;
 use App\Models\Schedule;
-use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
-use Illuminate\Database\Eloquent\Builder;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
@@ -21,6 +19,8 @@ class ScheduleResource extends Resource
     protected static ?string $model = Schedule::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    protected static ?string $recordTitleAttribute = 'schedule';
 
     public static function form(Schema $schema): Schema
     {
@@ -46,28 +46,5 @@ class ScheduleResource extends Resource
             'create' => CreateSchedule::route('/create'),
             'edit' => EditSchedule::route('/{record}/edit'),
         ];
-    }
-
-    public static function canCreate(): bool
-    {
-        return auth()->user()->hasAnyRole(['super_admin', 'coach']);
-    }
-
-    public static function canEdit(\Illuminate\Database\Eloquent\Model $record): bool
-    {
-        return auth()->user()->hasAnyRole(['super_admin', 'coach']);
-    }
-
-    public static function getEloquentQuery(): Builder
-    {
-        if (auth()->user()->hasRole('player')) {
-            return parent::getEloquentQuery()->where('team_id', auth()->user()->team_id);
-        }
-
-        if (auth()->user()->hasRole('coach')) {
-            return parent::getEloquentQuery()->where('team_id', auth()->user()->team_id);
-        }
-
-        return parent::getEloquentQuery();
     }
 }

@@ -8,7 +8,6 @@ use App\Filament\Resources\Teams\Pages\ListTeams;
 use App\Filament\Resources\Teams\Schemas\TeamForm;
 use App\Filament\Resources\Teams\Tables\TeamsTable;
 use App\Models\Team;
-use App\Models\User;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
@@ -20,6 +19,8 @@ class TeamResource extends Resource
     protected static ?string $model = Team::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    protected static ?string $recordTitleAttribute = 'team';
 
     public static function form(Schema $schema): Schema
     {
@@ -45,10 +46,5 @@ class TeamResource extends Resource
             'create' => CreateTeam::route('/create'),
             'edit' => EditTeam::route('/{record}/edit'),
         ];
-    }
-
-    public static function canViewAny(): bool
-    {
-        return auth()->user()->hasRole('super_admin');
     }
 }

@@ -2,23 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Team extends Model
 {
-    protected $guarded = [];
+    use HasFactory;
 
-    public function coach()
-    {
-        return $this->belongsTo(User::class, 'coach_id');
-    }
+    protected $fillable = [
+        'name',
+    ];
 
-    public function assistantCoach()
-    {
-        return $this->belongsTo(User::class, 'assistant_coach_id');
-    }
-
-    public function players()
+    public function users(): HasMany
     {
         return $this->hasMany(User::class);
     }
