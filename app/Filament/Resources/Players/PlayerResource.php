@@ -20,6 +20,8 @@ class PlayerResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
+    protected static ?string $recordTitleAttribute = 'player';
+
     public static function form(Schema $schema): Schema
     {
         return PlayerForm::configure($schema);

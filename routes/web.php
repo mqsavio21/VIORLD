@@ -31,3 +31,6 @@ Route::prefix('coach')->name('coach.')->group(function () {
     Route::get('/login', [CoachLoginController::class, 'create'])->name('login');
     Route::post('/login', [CoachLoginController::class, 'store']);
 });
+
+Route::post('/admin/logout', \App\Http\Controllers\Auth\LogoutController::class)->name('admin.logout');
+Route::post('/coach/logout', \App\Http\Controllers\Auth\LogoutController::class)->name('coach.logout');

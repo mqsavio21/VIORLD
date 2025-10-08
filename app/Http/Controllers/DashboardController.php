@@ -9,8 +9,9 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $materials = Material::where('team_id', auth()->user()->team_id)->get();
+        $player = auth()->user()->player;
+        $materials = Material::all();
 
-        return view('dashboard', compact('materials'));
+        return view('dashboard', compact('player', 'materials'));
     }
 }

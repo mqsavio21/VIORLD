@@ -13,7 +13,8 @@ class MaterialsTable
     {
         return $table
             ->columns([
-                //
+                \Filament\Tables\Columns\TextColumn::make('title')->searchable(),
+                \Filament\Tables\Columns\TextColumn::make('creator.name')->searchable(),
             ])
             ->filters([
                 //

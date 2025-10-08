@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Admin',
+            'username' => 'admin',
             'email' => 'admin@example.com',
             'team_id' => 1,
             'role' => 'admin',
@@ -24,16 +25,27 @@ class DatabaseSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Coach',
+            'username' => 'coach',
             'email' => 'coach@example.com',
             'team_id' => 1,
             'role' => 'coach',
         ]);
 
-        User::factory()->create([
+        $playerUser = User::factory()->create([
             'name' => 'Player',
+            'username' => 'player',
             'email' => 'player@example.com',
             'team_id' => 1,
             'role' => 'player',
+        ]);
+
+        \App\Models\Player::factory()->create([
+            'name' => 'Player',
+            'rank' => 'Unranked',
+            'main_role' => 'Duelist',
+            'notes' => 'New player',
+            'user_id' => $playerUser->id,
+            'team_id' => 1,
         ]);
     }
 }

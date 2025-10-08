@@ -13,12 +13,14 @@ return new class extends Migration
     {
         Schema::create('players', function (Blueprint $table) {
             $table->id();
-            $table->string('nickname');
+            $table->string('name');
             $table->string('rank');
-            $table->string('role');
+            $table->string('main_role');
+            $table->text('notes')->nullable();
             $table->string('discord_id')->nullable();
             $table->string('status')->default('pending');
             $table->foreignId('team_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }

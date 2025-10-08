@@ -13,7 +13,10 @@ class PlayersTable
     {
         return $table
             ->columns([
-                //
+                \Filament\Tables\Columns\TextColumn::make('name')->searchable(),
+                \Filament\Tables\Columns\TextColumn::make('rank')->searchable(),
+                \Filament\Tables\Columns\TextColumn::make('main_role')->searchable(),
+                \Filament\Tables\Columns\TextColumn::make('user.name')->searchable(),
             ])
             ->filters([
                 //
