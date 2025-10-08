@@ -53,12 +53,7 @@ class CoachPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->authMiddleware([
-                Authenticate::class,
-            ])
-            ->middleware([
-                'role:admin,coach'
+                'role:coach',
             ]);
     }
 }
