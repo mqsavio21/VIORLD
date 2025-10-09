@@ -26,8 +26,6 @@ class CoachPanelProvider extends PanelProvider
         return $panel
             ->id('coach')
             ->path('coach')
-            ->login(fn () => route('coach.login'))
-            ->login()
             ->registration()
             ->passwordReset()
             ->colors([

@@ -9,9 +9,14 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        $player = auth()->user()->player;
+        $user = auth()->user();
         $materials = Material::all();
 
-        return view('dashboard', compact('player', 'materials'));
+        if ($user->role === 'player') {
+            $player = $user->player;
+            return view('dashboard', compact('player', 'materials'));
+        }
+
+        return view('dashboard', compact('user', 'materials'));
     }
 }

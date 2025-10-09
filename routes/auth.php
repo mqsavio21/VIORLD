@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -54,6 +55,6 @@ Route::middleware('auth')->group(function () {
 
     Route::put('password', [PasswordController::class, 'update'])->name('password.update');
 
-    Route::post('logout', [LoginController::class, 'destroy'])
+    Route::post('logout', LogoutController::class)
         ->name('logout');
 });
