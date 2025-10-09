@@ -27,6 +27,7 @@ class AdminPanelProvider extends PanelProvider
             ->default()
             ->id('admin')
             ->path('admin')
+            ->login(fn () => redirect()->route('login'))
             ->registration()
             ->passwordReset()
             ->colors([
@@ -55,7 +56,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-                'admin',
+                'role:admin',
             ]);
     }
 }

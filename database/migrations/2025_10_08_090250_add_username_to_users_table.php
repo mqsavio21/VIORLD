@@ -11,10 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->string('username')->unique()->after('name');
-            $table->string('email')->nullable()->change();
-        });
+        // This migration is no longer needed as the username is added in the create_users_table migration
+        // and the email column has been removed.
     }
 
     /**
@@ -22,9 +20,7 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('username');
-            $table->string('email')->nullable(false)->change();
-        });
+        // This migration is no longer needed as the username is added in the create_users_table migration
+        // and the email column has been removed.
     }
 };

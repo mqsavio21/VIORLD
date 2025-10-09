@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
-        'email',
+        'username',
         'password',
         'team_id',
         'role',
@@ -43,7 +43,6 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
     }
@@ -51,10 +50,6 @@ class User extends Authenticatable
     /**
      * Get the player associated with the user.
      */
-    public function player()
-    {
-        return $this->hasOne(Player::class);
-    }
     public function team(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Team::class);

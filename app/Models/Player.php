@@ -11,7 +11,7 @@ class Player extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nickname',
+        'name',
         'rank',
         'role',
         'discord_id',
