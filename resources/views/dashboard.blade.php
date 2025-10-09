@@ -10,13 +10,11 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
                     <h3 class="font-semibold text-lg">Welcome</h3>
-                    @if (isset($player))
-                        <p><strong>Name:</strong> {{ $player->name }}</p>
-                        <p><strong>Rank:</strong> {{ $player->rank }}</p>
-                        <p><strong>Main Role:</strong> {{ $player->main_role }}</p>
-                        <p><strong>Notes from Coach:</strong> {{ $player->notes }}</p>
-                    @else
-                        <p>Welcome, {{ $user->name }}!</p>
+                    <p>Welcome, {{ $user->name }}!</p>
+                    @if ($user->role === 'player')
+                        <p><strong>Rank:</strong> {{ $user->rank }}</p>
+                        <p><strong>Main Role:</strong> {{ $user->main_role }}</p>
+                        <p><strong>Notes from Coach:</strong> {{ $user->notes }}</p>
                     @endif
                 </div>
             </div>

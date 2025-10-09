@@ -12,10 +12,6 @@ class DashboardController extends Controller
         $user = auth()->user();
         $materials = Material::all();
 
-        if ($user->role === 'player') {
-            $player = $user->player;
-            return view('dashboard', compact('player', 'materials'));
-        }
 
         return view('dashboard', compact('user', 'materials'));
     }
