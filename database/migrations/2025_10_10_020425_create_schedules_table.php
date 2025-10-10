@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->foreignId('team_id')->constrained()->onDelete('cascade');
             $table->foreignId('coach_id')->constrained('users')->onDelete('cascade');
-            $table->dateTime('date_start');
-            $table->dateTime('date_end');
+            $table->date('date_start');
+            $table->time('time_start');
             $table->text('description');
             $table->timestamps();
         });

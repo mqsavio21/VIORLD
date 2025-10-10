@@ -37,10 +37,6 @@ class SchedulesTable
             ->recordActions([
                 EditAction::make(),
             ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+            ->toolbarActions([]);
     }
 }

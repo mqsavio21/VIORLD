@@ -13,6 +13,8 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class MaterialResource extends Resource
 {
@@ -46,5 +48,18 @@ class MaterialResource extends Resource
             'create' => CreateMaterial::route('/create'),
             'edit' => EditMaterial::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        if (Auth::user()->role === 'coach') {
+            $query->whereHas('creator', function (Builder $query) {
+                $query->where('team_id', Auth::user()->team_id);
+            });
+        }
+
+        return $query;
     }
 }

@@ -14,6 +14,15 @@ class TaskForm
 {
     public static function configure(Schema $schema): Schema
     {
+        $user = Auth::user();
+        $players = $user->role === 'coach'
+            ? User::where('role', 'player')->where('team_id', $user->team_id)->pluck('name', 'id')
+            : User::where('role', 'player')->pluck('name', 'id');
+
+        $coaches = $user->role === 'coach'
+            ? User::where('role', 'coach')->where('team_id', $user->team_id)->pluck('name', 'id')
+            : User::whereIn('role', ['coach', 'admin'])->pluck('name', 'id');
+
         return $schema
             ->components([
                 TextInput::make('title')
@@ -23,12 +32,12 @@ class TaskForm
                     ->required(),
                 Select::make('assigned_to')
                     ->label('Assign To')
-                    ->options(User::where('role', 'player')->pluck('name', 'id'))
+                    ->options($players)
                     ->searchable()
                     ->required(),
                 Select::make('assigned_by')
                     ->label('Assign By')
-                    ->options(User::whereIn('role', ['coach', 'admin'])->pluck('name', 'id'))
+                    ->options($coaches)
                     ->default(Auth::id())
                     ->required(),
                 DatePicker::make('due_date')

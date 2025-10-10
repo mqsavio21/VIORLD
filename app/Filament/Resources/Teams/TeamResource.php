@@ -10,10 +10,12 @@ use App\Filament\Resources\Teams\Tables\TeamsTable;
 use App\Models\Team;
 use BackedEnum;
 use Filament\Resources\Resource;
+use Illuminate\Database\Eloquent\Model;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class TeamResource extends Resource
 {
@@ -51,6 +53,17 @@ class TeamResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->withCount('players');
+        $query = parent::getEloquentQuery()->withCount('players');
+
+        if (Auth::user()->role === 'coach') {
+            $query->where('coach_id', Auth::id());
+        }
+
+        return $query;
+    }
+
+    public static function canView(Model $record = null): bool
+    {
+        return Auth::user()->role === 'admin';
     }
 }

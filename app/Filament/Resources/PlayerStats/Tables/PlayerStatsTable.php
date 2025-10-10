@@ -35,10 +35,6 @@ class PlayerStatsTable
             ->recordActions([
                 EditAction::make(),
             ])
-            ->toolbarActions([
-                BulkActionGroup::make([
-                    DeleteBulkAction::make(),
-                ]),
-            ]);
+            ->toolbarActions([]);
     }
 }

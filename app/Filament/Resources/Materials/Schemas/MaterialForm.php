@@ -13,6 +13,11 @@ class MaterialForm
 {
     public static function configure(Schema $schema): Schema
     {
+        $user = Auth::user();
+        $coaches = $user->role === 'coach'
+            ? User::where('role', 'coach')->where('team_id', $user->team_id)->pluck('name', 'id')
+            : User::whereIn('role', ['coach', 'admin'])->pluck('name', 'id');
+
         return $schema
             ->components([
                 TextInput::make('title')
@@ -34,7 +39,7 @@ class MaterialForm
                     ->maxLength(255),
                 Select::make('created_by')
                     ->label('Author')
-                    ->options(User::whereIn('role', ['coach', 'admin'])->pluck('name', 'id'))
+                    ->options($coaches)
                     ->default(Auth::id())
                     ->required(),
             ]);

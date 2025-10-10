@@ -15,13 +15,12 @@ class Schedule extends Model
         'team_id',
         'coach_id',
         'date_start',
-        'date_end',
+        'time_start',
         'description',
     ];
 
     protected $casts = [
-        'date_start' => 'datetime',
-        'date_end' => 'datetime',
+        'date_start' => 'date',
     ];
 
     public function team(): BelongsTo

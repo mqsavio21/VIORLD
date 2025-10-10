@@ -10,10 +10,10 @@ class ListPlayers extends ListRecords
 {
     protected static string $resource = PlayerResource::class;
 
+    protected static ?string $title = 'Players';
+
     protected function getHeaderActions(): array
     {
-        return [
-            CreateAction::make(),
-        ];
+        return [];
     }
 }

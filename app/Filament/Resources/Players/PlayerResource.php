@@ -14,12 +14,15 @@ use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class PlayerResource extends Resource
 {
     protected static ?string $model = User::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+
+    protected static ?string $navigationLabel = 'Players';
 
     protected static ?string $recordTitleAttribute = 'name';
 
@@ -51,6 +54,13 @@ class PlayerResource extends Resource
 
     public static function getEloquentQuery(): Builder
     {
-        return parent::getEloquentQuery()->where('role', 'player');
+        $query = parent::getEloquentQuery()->where('role', 'player');
+
+        if (Auth::user()->role === 'coach') {
+            $query->where('team_id', Auth::user()->team_id);
+        }
+
+        return $query;
     }
+
 }

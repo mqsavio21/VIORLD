@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Players\Schemas;
+namespace App\Filament\Resources\Users\Schemas;
 
 use App\Models\Team;
 use Filament\Forms\Components\Select;
@@ -8,12 +8,10 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Illuminate\Support\Facades\Auth;
 
-class PlayerForm
+class UserForm
 {
     public static function configure(Schema $schema): Schema
     {
-        $user = Auth::user();
-
         return $schema
             ->components([
                 TextInput::make('name')
@@ -21,13 +19,11 @@ class PlayerForm
                     ->maxLength(255),
                 TextInput::make('username')
                     ->required()
-                    ->maxLength(255)
-                    ->disabled($user->role === 'coach'),
+                    ->maxLength(255),
                 TextInput::make('password')
                     ->password()
                     ->required()
-                    ->maxLength(255)
-                    ->disabled($user->role === 'coach'),
+                    ->maxLength(255),
                 Select::make('team_id')
                     ->label('Team')
                     ->options(Team::all()->pluck('name', 'id'))

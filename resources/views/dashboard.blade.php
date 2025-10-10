@@ -80,6 +80,36 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
+                <div class="p-6 text-gray-900">
+                    <h3 class="font-semibold text-lg">Schedules</h3>
+                    <ul>
+                        @foreach ($schedules as $schedule)
+                            <li>
+                                <p><strong>{{ $schedule->title }}</strong></p>
+                                <p>{{ $schedule->date_start->format('d M Y') }} at {{ $schedule->time_start }}</p>
+                                <p>{{ $schedule->description }}</p>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
+                <div class="p-6 text-gray-900">
+                    <h3 class="font-semibold text-lg">Tasks</h3>
+                    <ul>
+                        @foreach ($tasks as $task)
+                            <li>
+                                <p><strong>{{ $task->title }}</strong></p>
+                                <p>Due: {{ $task->due_date }}</p>
+                                <p>{{ $task->description }}</p>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>

@@ -32,7 +32,13 @@ class CoachPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
+            ->resources([
+                \App\Filament\Resources\Players\PlayerResource::class,
+                \App\Filament\Resources\PlayerStats\PlayerStatResource::class,
+                \App\Filament\Resources\Schedules\ScheduleResource::class,
+                \App\Filament\Resources\Tasks\TaskResource::class,
+                \App\Filament\Resources\Materials\MaterialResource::class,
+            ])
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,
