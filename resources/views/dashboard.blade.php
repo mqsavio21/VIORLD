@@ -110,6 +110,21 @@
                     </ul>
                 </div>
             </div>
+
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
+                <div class="p-6 text-gray-900">
+                    <h3 class="font-semibold text-lg">Match History</h3>
+                    <ul>
+                        @foreach ($matchHistories as $match)
+                            <li>
+                                <p><strong>{{ $match->team->name }} vs {{ $match->opponent }}</strong></p>
+                                <p>{{ $match->match_date->format('d M Y') }} on {{ $match->map }}</p>
+                                <p>{{ $match->result }} ({{ $match->score }})</p>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>

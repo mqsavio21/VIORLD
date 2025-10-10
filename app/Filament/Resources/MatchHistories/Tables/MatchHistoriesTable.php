@@ -1,30 +1,36 @@
 <?php
 
-namespace App\Filament\Resources\Schedules\Tables;
+namespace App\Filament\Resources\MatchHistories\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\BadgeColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SchedulesTable
+class MatchHistoriesTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('title')
-                    ->searchable(),
                 TextColumn::make('team.name')
                     ->searchable(),
-                TextColumn::make('coach.name')
+                TextColumn::make('opponent')
                     ->searchable(),
-                TextColumn::make('date_start')
+                TextColumn::make('map')
+                    ->searchable(),
+                BadgeColumn::make('result')
+                    ->colors([
+                        'success' => 'Win',
+                        'danger' => 'Lose',
+                        'secondary' => 'Draw',
+                    ]),
+                TextColumn::make('score'),
+                TextColumn::make('match_date')
                     ->date()
-                    ->sortable(),
-                TextColumn::make('time_start')
                     ->sortable(),
             ])
             ->filters([
@@ -36,6 +42,10 @@ class SchedulesTable
             ->recordActions([
                 EditAction::make(),
             ])
-            ->toolbarActions([]);
+            ->toolbarActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
+            ]);
     }
 }

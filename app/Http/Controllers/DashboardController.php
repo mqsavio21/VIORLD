@@ -6,6 +6,7 @@ use App\Models\Material;
 use App\Models\PlayerStat;
 use App\Models\Schedule;
 use App\Models\Task;
+use App\Models\MatchHistory;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -19,8 +20,9 @@ class DashboardController extends Controller
         $playerStat = PlayerStat::where('player_id', $user->id)->latest()->first();
         $schedules = Schedule::where('team_id', $user->team_id)->get();
         $tasks = Task::where('assigned_to', $user->id)->get();
+        $matchHistories = MatchHistory::where('team_id', $user->team_id)->get();
 
 
-        return view('dashboard', compact('user', 'materials', 'playerStat', 'schedules', 'tasks'));
+        return view('dashboard', compact('user', 'materials', 'playerStat', 'schedules', 'tasks', 'matchHistories'));
     }
 }

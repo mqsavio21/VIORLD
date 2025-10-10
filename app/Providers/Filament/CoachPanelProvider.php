@@ -24,6 +24,8 @@ class CoachPanelProvider extends PanelProvider
     public function panel(Panel $panel): Panel
     {
         return $panel
+            ->brandName('VIOR')
+            ->renderHook('panels::body.end', fn () => view('filament.footer'))
             ->id('coach')
             ->path('coach')
             ->login(fn () => redirect()->route('login'))
@@ -38,15 +40,14 @@ class CoachPanelProvider extends PanelProvider
                 \App\Filament\Resources\Schedules\ScheduleResource::class,
                 \App\Filament\Resources\Tasks\TaskResource::class,
                 \App\Filament\Resources\Materials\MaterialResource::class,
+                \App\Filament\Resources\MatchHistories\MatchHistoryResource::class,
             ])
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
                 Dashboard::class,
             ])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
-                FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
