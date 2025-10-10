@@ -54,4 +54,24 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Team::class);
     }
+
+    public function tasks(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Task::class, 'assigned_to');
+    }
+
+    public function assignedTasks(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Task::class, 'assigned_by');
+    }
+
+    public function playerStats(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(PlayerStat::class, 'player_id');
+    }
+
+    public function materials(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Material::class, 'created_by');
+    }
 }

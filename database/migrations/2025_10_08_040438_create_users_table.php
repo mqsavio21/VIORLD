@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->rememberToken();
-            $table->foreignId('team_id')->nullable()->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('team_id')->nullable();
             $table->string('rank')->nullable();
             $table->string('main_role')->nullable();
             $table->text('notes')->nullable();

@@ -13,14 +13,13 @@ class Material extends Model
     protected $fillable = [
         'title',
         'description',
-        'video_link',
-        'file_path',
         'category',
-        'team_id',
+        'link',
+        'created_by',
     ];
 
-    public function team(): BelongsTo
+    public function creator(): BelongsTo
     {
-        return $this->belongsTo(Team::class);
+        return $this->belongsTo(User::class, 'created_by');
     }
 }

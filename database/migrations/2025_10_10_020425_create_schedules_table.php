@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('materials', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->text('description')->nullable();
-            $table->string('video_link')->nullable();
-            $table->string('file_path')->nullable();
-            $table->string('category');
-            $table->foreignId('team_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('team_id')->constrained()->onDelete('cascade');
+            $table->foreignId('coach_id')->constrained('users')->onDelete('cascade');
+            $table->dateTime('date_start');
+            $table->dateTime('date_end');
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('materials');
+        Schema::dropIfExists('schedules');
     }
 };

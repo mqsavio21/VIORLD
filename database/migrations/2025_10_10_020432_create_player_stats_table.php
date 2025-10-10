@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('player_stats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('player_id')->constrained('users');
-            $table->integer('episode');
-            $table->integer('act');
+            $table->foreignId('player_id')->constrained('users')->onDelete('cascade');
+            $table->string('episode');
+            $table->string('act');
             $table->string('month');
             $table->string('peak_rating');
             $table->integer('playtime');

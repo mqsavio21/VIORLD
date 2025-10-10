@@ -13,6 +13,9 @@ class TeamSeeder extends Seeder
      */
     public function run(): void
     {
-        Team::create(['name' => 'Default Team']);
+        Team::create(['name' => 'VIOR Noctis']);
+        Team::create(['name' => 'VIOR Erevos']);
+        Team::create(['name' => 'VIOR Reverie']);
+        Team::create(['name' => 'VIOR Academy']);
     }
 }

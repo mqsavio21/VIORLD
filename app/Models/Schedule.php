@@ -11,19 +11,26 @@ class Schedule extends Model
     use HasFactory;
 
     protected $fillable = [
-        'topic',
-        'start_time',
-        'end_time',
+        'title',
         'team_id',
+        'coach_id',
+        'date_start',
+        'date_end',
+        'description',
     ];
 
     protected $casts = [
-        'start_time' => 'datetime',
-        'end_time' => 'datetime',
+        'date_start' => 'datetime',
+        'date_end' => 'datetime',
     ];
 
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);
+    }
+
+    public function coach(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'coach_id');
     }
 }

@@ -12,10 +12,18 @@ class Team extends Model
 
     protected $fillable = [
         'name',
+        'coach_id',
+        'player_count',
+        'description',
     ];
 
-    public function users(): HasMany
+    public function coach(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasMany(User::class);
+        return $this->belongsTo(User::class, 'coach_id');
+    }
+
+    public function players(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(User::class)->where('role', 'player');
     }
 }

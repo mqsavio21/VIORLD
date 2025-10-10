@@ -13,6 +13,7 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class TeamResource extends Resource
 {
@@ -46,5 +47,10 @@ class TeamResource extends Resource
             'create' => CreateTeam::route('/create'),
             'edit' => EditTeam::route('/{record}/edit'),
         ];
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->withCount('players');
     }
 }

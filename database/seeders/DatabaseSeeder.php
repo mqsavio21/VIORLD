@@ -15,28 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             TeamSeeder::class,
+            UserSeeder::class,
         ]);
-
-        User::factory()->create([
-            'name' => 'Admin',
-            'username' => 'admin',
-            'team_id' => 1,
-            'role' => 'admin',
-        ]);
-
-        User::factory()->create([
-            'name' => 'Coach',
-            'username' => 'coach',
-            'team_id' => 1,
-            'role' => 'coach',
-        ]);
-
-        $playerUser = User::factory()->create([
-            'name' => 'Player',
-            'username' => 'player',
-            'team_id' => 1,
-            'role' => 'player',
-        ]);
-
     }
 }

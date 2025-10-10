@@ -3,8 +3,10 @@
 namespace App\Filament\Resources\Materials\Tables;
 
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\CreateAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class MaterialsTable
@@ -13,11 +15,18 @@ class MaterialsTable
     {
         return $table
             ->columns([
-                \Filament\Tables\Columns\TextColumn::make('title')->searchable(),
-                \Filament\Tables\Columns\TextColumn::make('creator.name')->searchable(),
+                TextColumn::make('title')
+                    ->searchable(),
+                TextColumn::make('category')
+                    ->searchable(),
+                TextColumn::make('creator.name')
+                    ->searchable(),
             ])
             ->filters([
                 //
+            ])
+            ->headerActions([
+                CreateAction::make(),
             ])
             ->recordActions([
                 EditAction::make(),

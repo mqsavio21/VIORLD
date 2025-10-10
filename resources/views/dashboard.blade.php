@@ -19,6 +19,54 @@
                 </div>
             </div>
 
+            @if ($user->role === 'player' && $playerStat)
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
+                    <div class="p-6 text-gray-900">
+                        <h3 class="font-semibold text-lg border-b border-gray-200 pb-4">
+                            Latest Player Stats ({{ $playerStat->month }} - {{ $playerStat->episode }} / {{ $playerStat->act }})
+                        </h3>
+                        <div class="flex space-x-6 mt-4">
+                            <div class="w-1/2 space-y-4">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500">Peak Rating</p>
+                                    <p class="mt-1 text-lg font-semibold text-gray-900">{{ $playerStat->peak_rating }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500">Playtime (hours)</p>
+                                    <p class="mt-1 text-lg font-semibold text-gray-900">{{ $playerStat->playtime }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500">Wins</p>
+                                    <p class="mt-1 text-lg font-semibold text-gray-900">{{ $playerStat->wins }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500">Win %</p>
+                                    <p class="mt-1 text-lg font-semibold text-gray-900">{{ $playerStat->win_percentage }}%</p>
+                                </div>
+                            </div>
+                            <div class="w-1/2 space-y-4">
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500">Top Agent</p>
+                                    <p class="mt-1 text-lg font-semibold text-gray-900">{{ $playerStat->top_agent }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500">K/D Ratio</p>
+                                    <p class="mt-1 text-lg font-semibold text-gray-900">{{ $playerStat->kd_ratio }}</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500">Headshot %</p>
+                                    <p class="mt-1 text-lg font-semibold text-gray-900">{{ $playerStat->hs_percentage }}%</p>
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-500">Recorded</p>
+                                    <p class="mt-1 text-lg font-semibold text-gray-900">{{ $playerStat->recorded_at }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
                 <div class="p-6 text-gray-900">
                     <h3 class="font-semibold text-lg">Training Materials</h3>

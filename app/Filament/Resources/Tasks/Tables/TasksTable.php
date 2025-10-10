@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Players\Tables;
+namespace App\Filament\Resources\Tasks\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\CreateAction;
@@ -9,19 +9,22 @@ use Filament\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class PlayersTable
+class TasksTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('name')
+                TextColumn::make('title')
                     ->searchable(),
-                TextColumn::make('username')
+                TextColumn::make('assignee.name')
                     ->searchable(),
-                TextColumn::make('team.name')
+                TextColumn::make('assigner.name')
                     ->searchable(),
-                TextColumn::make('role')
+                TextColumn::make('due_date')
+                    ->date()
+                    ->sortable(),
+                TextColumn::make('status')
                     ->searchable(),
             ])
             ->filters([
