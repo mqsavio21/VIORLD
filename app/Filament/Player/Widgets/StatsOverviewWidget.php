@@ -2,28 +2,30 @@
 
 namespace App\Filament\Player\Widgets;
 
-use App\Models\MatchHistory;
-use App\Models\Schedule;
-use App\Models\Task;
-use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseStatsOverviewWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
+
+use App\Models\PlayerStat;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class StatsOverviewWidget extends BaseStatsOverviewWidget
 {
     protected function getStats(): array
     {
-        $user = Auth::user();
-        $winCount = MatchHistory::where('team_id', $user->team_id)->where('result', 'Win')->count();
-        $lossCount = MatchHistory::where('team_id', $user->team_id)->where('result', 'Lose')->count();
-        $drawCount = MatchHistory::where('team_id', $user->team_id)->where('result', 'Draw')->count();
-        $taskCount = Task::where('assigned_to', $user->id)->count();
+        $playerStat = PlayerStat::where('player_id', Auth::id())->latest()->first();
+
+        if (!$playerStat) {
+            return [];
+        }
 
         return [
-            Stat::make('W/L/D Ratio', $winCount . ' / ' . $lossCount . ' / ' . $drawCount),
-            Stat::make('Total Tasks', $taskCount),
+            Stat::make('Peak Rating', $playerStat->peak_rating),
+            Stat::make('Playtime (hours)', $playerStat->playtime),
+            Stat::make('Wins', $playerStat->wins),
+            Stat::make('Win %', $playerStat->win_percentage . '%'),
+            Stat::make('K/D Ratio', $playerStat->kd_ratio),
+            Stat::make('Headshot %', $playerStat->hs_percentage . '%'),
+            Stat::make('Top Agent', $playerStat->top_agent),
         ];
     }
 }

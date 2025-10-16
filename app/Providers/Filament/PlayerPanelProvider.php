@@ -40,8 +40,7 @@ class PlayerPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Player/Widgets'), for: 'App\Filament\Player\Widgets')
             ->widgets([
                 AccountWidget::class,
-                \App\Filament\Player\Widgets\StatsOverviewWidget::class,
-                \App\Filament\Player\Widgets\UpcomingSchedulesWidget::class,
+                \App\Filament\Player\Widgets\TaskWidget::class,
                 \App\Filament\Player\Widgets\RecentMatchHistoryWidget::class,
             ])
             ->middleware([
