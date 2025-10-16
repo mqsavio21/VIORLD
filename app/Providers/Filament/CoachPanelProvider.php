@@ -48,6 +48,7 @@ class CoachPanelProvider extends PanelProvider
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
                 AccountWidget::class,
+                \App\Filament\Widgets\WinLossDrawChartWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,

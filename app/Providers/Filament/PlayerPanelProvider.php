@@ -19,31 +19,30 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-class AdminPanelProvider extends PanelProvider
+class PlayerPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
             ->brandName('VIOR')
             ->renderHook('panels::body.end', fn () => view('filament.footer'))
-            ->id('admin')
-            ->path('admin')
+            ->id('player')
+            ->path('players')
             ->login(fn () => redirect()->route('login'))
-            ->registration()
-            ->passwordReset()
             ->colors([
                 'primary' => Color::Amber,
             ])
-            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
+            ->discoverResources(in: app_path('Filament/Player/Resources'), for: 'App\Filament\Player\Resources')
+            ->discoverPages(in: app_path('Filament/Player/Pages'), for: 'App\Filament\Player\Pages')
             ->pages([
                 Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Player/Widgets'), for: 'App\Filament\Player\Widgets')
             ->widgets([
                 AccountWidget::class,
-                \App\Filament\Widgets\WinLossDrawChartWidget::class,
+                \App\Filament\Player\Widgets\StatsOverviewWidget::class,
+                \App\Filament\Player\Widgets\UpcomingSchedulesWidget::class,
+                \App\Filament\Player\Widgets\RecentMatchHistoryWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -58,7 +57,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-                'role:admin',
+                'role:player',
             ]);
     }
 }

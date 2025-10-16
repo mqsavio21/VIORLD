@@ -67,6 +67,7 @@
                 </div>
             @endif
 
+            @if ($user->role !== 'player')
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg mt-6">
                 <div class="p-6 text-gray-900">
                     <h3 class="font-semibold text-lg">Training Materials</h3>
@@ -125,6 +126,7 @@
                     </ul>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </x-app-layout>

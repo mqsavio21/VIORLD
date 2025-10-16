@@ -38,7 +38,7 @@ class LoginController extends Controller
             return redirect()->intended('/coach');
         }
 
-        return redirect()->intended('/dashboard');
+        return redirect()->intended('/players');
     }
 
 }

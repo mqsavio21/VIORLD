@@ -23,6 +23,10 @@ class MatchHistory extends Model
         'notes',
     ];
 
+    protected $casts = [
+        'match_date' => 'datetime',
+    ];
+
     public function team(): BelongsTo
     {
         return $this->belongsTo(Team::class);

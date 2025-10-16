@@ -20,17 +20,19 @@ class StatsOverviewWidget extends BaseStatsOverviewWidget
             $scheduleCount = Schedule::whereDate('date_start', '>=', now()->format('Y-m-d'))->whereTime('time_start', '>=', now()->format('H:i:s'))->count();
             $winCount = MatchHistory::where('result', 'Win')->count();
             $lossCount = MatchHistory::where('result', 'Lose')->count();
+            $drawCount = MatchHistory::where('result', 'Draw')->count();
         } else {
             $playerCount = User::where('role', 'player')->where('team_id', $user->team_id)->count();
             $scheduleCount = Schedule::where('team_id', $user->team_id)->whereDate('date_start', '>=', now()->format('Y-m-d'))->whereTime('time_start', '>=', now()->format('H:i:s'))->count();
             $winCount = MatchHistory::where('team_id', $user->team_id)->where('result', 'Win')->count();
             $lossCount = MatchHistory::where('team_id', $user->team_id)->where('result', 'Lose')->count();
+            $drawCount = MatchHistory::where('team_id', $user->team_id)->where('result', 'Draw')->count();
         }
 
         return [
             Stat::make('Total Players', $playerCount),
             Stat::make('Upcoming Schedules', $scheduleCount),
-            Stat::make('Win/Loss Ratio', $winCount . ' / ' . $lossCount),
+            Stat::make('W/L/D Ratio', $winCount . ' / ' . $lossCount . ' / ' . $drawCount),
         ];
     }
 }
